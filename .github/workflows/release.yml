@@ -62,7 +62,7 @@ jobs:
         run: pnpm tauri build --target ${{ matrix.target }} --bundles ${{ matrix.bundles }}
         env:
           CI: true
-          TAURI_SIGNING_PRIVATE_KEY: xKCwDTEi8B1uwpwUcO6f6L1RN7SAL+FwdREP9TpYy8M=
+          TAURI_SIGNING_PRIVATE_KEY: QUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQQ==
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
