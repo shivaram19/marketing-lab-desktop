@@ -193,7 +193,7 @@ export const DEFAULT_PREFERENCES: Preferences = {
     {
       id: "marketing-lab-default",
       label: "🌟 Marketing Lab",
-      host: "YOUR_VM_IP_HERE",
+      host: "20.193.234.42",
       user: "marketer",
       port: 22,
       rootPath: "/home/marketer",
