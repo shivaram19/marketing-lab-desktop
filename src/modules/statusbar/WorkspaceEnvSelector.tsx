@@ -223,6 +223,25 @@ export function WorkspaceEnvSelector({ onSelect }: Props) {
             <HugeiconsIcon icon={Add01Icon} size={13} strokeWidth={1.75} />
             Add SSH workspace
           </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem
+            onSelect={() => {
+              const profile: SshWorkspaceProfile = {
+                id: "marketing-lab-quick",
+                label: "🌟 Marketing Lab",
+                host: "YOUR_VM_IP_HERE",
+                user: "marketer",
+                port: 22,
+                rootPath: "/home/marketer",
+              };
+              setDialogMode("create");
+              setDialogProfile(profile);
+              setDialogOpen(true);
+            }}
+            className="gap-2 text-emerald-600"
+          >
+            🌟 Connect to Marketing Lab
+          </DropdownMenuItem>
           {IS_WINDOWS ? (
             <>
               <DropdownMenuSeparator />

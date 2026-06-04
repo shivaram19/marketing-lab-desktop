@@ -1,6 +1,6 @@
 import {
   DEFAULT_AUTOCOMPLETE_MODEL,
-  DEFAULT_MODEL_ID,
+  DEFAULT_CODEX_MODEL_ID,
   isKnownModelId,
   LMSTUDIO_DEFAULT_BASE_URL,
   MLX_DEFAULT_BASE_URL,
@@ -160,9 +160,9 @@ export const DEFAULT_PREFERENCES: Preferences = {
   backgroundImageId: null,
   backgroundOpacity: 0.5,
   backgroundBlur: 0,
-  defaultModelId: DEFAULT_MODEL_ID,
+  defaultModelId: DEFAULT_CODEX_MODEL_ID,  // Codex is free, no API key needed
   editorTheme: "atomone",
-  customInstructions: "",
+  customInstructions: "You are the Marketing Lab AI assistant. The user connects to a remote Ubuntu VM with fish shell. Their knowledge vault is at ~/vault/ organized by PARA method. They have CrewAI crews for market research, content creation, and competitor intelligence. Suggest running crews when relevant.",
   autostart: false,
   restoreWindowState: true,
   autocompleteEnabled: false,
@@ -189,7 +189,16 @@ export const DEFAULT_PREFERENCES: Preferences = {
   terminalFontSize: TERMINAL_FONT_SIZE_DEFAULT,
   terminalScrollback: TERMINAL_SCROLLBACK_DEFAULT,
   lastWslDistro: null,
-  sshWorkspaces: [],
+  sshWorkspaces: [
+    {
+      id: "marketing-lab-default",
+      label: "🌟 Marketing Lab",
+      host: "YOUR_VM_IP_HERE",
+      user: "marketer",
+      port: 22,
+      rootPath: "/home/marketer",
+    },
+  ],
   zoomLevel: 1.0,
   agentNotifications: true,
   shortcuts: {} as Record<ShortcutId, KeyBinding[]>,

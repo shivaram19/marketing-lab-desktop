@@ -238,6 +238,7 @@ pub fn run() {
             net::lm_ping,
             net::ai_http_request,
             net::ai_http_stream,
+            modules::ssh::ssh_run_crew,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

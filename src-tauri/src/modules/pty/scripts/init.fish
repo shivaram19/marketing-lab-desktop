@@ -49,3 +49,31 @@ function __terax_preexec --on-event fish_preexec
     set -l cmd (string replace -ra '[\x00-\x1f\x7f]' ' ' -- "$argv")
     printf '\e]133;C;%s\e\\' (string sub -l 256 -- "$cmd")
 end
+
+# ═══════════════════════════════════════════════════════════════
+#  Marketing Lab Custom Aliases
+# ═══════════════════════════════════════════════════════════════
+
+alias files="yazi"
+alias where="z"
+alias preview="bat"
+alias help="tldr"
+alias system="btop"
+alias my-vault="cd ~/vault && yazi"
+alias inbox="cd ~/vault/00-Inbox && yazi"
+alias clients="cd ~/vault/01-Clients && yazi"
+alias research="cd ~/vault/02-Research && yazi"
+alias marketing="cd ~/vault/03-Marketing && yazi"
+alias vault-graph="python3 ~/tools/vault-graph.py"
+alias run-crew="~/tools/run-crew.sh"
+
+function fish_greeting
+    echo "🌟 Welcome to your Marketing Research Lab!"
+    echo ""
+    echo "  📁 Your Knowledge Vault:  ~/vault/"
+    echo "  🤖 Run a Research Crew:   crewai run"
+    echo "  🔍 Quick Help:            help <command>"
+    echo ""
+    echo "💡 Tip: Type 'files' to browse folders visually."
+    echo ""
+end

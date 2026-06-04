@@ -4,6 +4,22 @@
 @import "./fonts.css";
 @import "./code-highlight.css";
 
+/* ═══════════════════════════════════════════════════════════════
+   Marketing Lab Theme Overrides
+   ═══════════════════════════════════════════════════════════════ */
+
+:root {
+  --marketing-primary: #10b981;
+  --marketing-secondary: #0ea5e9;
+  --marketing-accent: #f59e0b;
+  --marketing-bg: #0f172a;
+  --marketing-surface: #1e293b;
+}
+
+[data-panel="statusbar"] {
+  border-top: 2px solid var(--marketing-primary);
+}
+
 @source "../../node_modules/streamdown/dist/index.js";
 
 @custom-variant dark (&:is(.dark *));

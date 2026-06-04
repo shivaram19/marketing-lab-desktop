@@ -9,11 +9,13 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { IncognitoIcon } from "@hugeicons/core-free-icons";
+import { IncognitoIcon, BotIcon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { CwdBreadcrumb } from "./CwdBreadcrumb";
 import { WorkspaceEnvSelector } from "./WorkspaceEnvSelector";
+import { CrewRunDialog } from "./CrewRunDialog";
 import type { WorkspaceEnv } from "@/modules/workspace";
+import { useState } from "react";
 
 type Props = {
   cwd: string | null;
@@ -41,6 +43,7 @@ export function StatusBar({
 }: Props) {
   const panelOpen = useChatStore((s) => s.panelOpen);
   const openPanel = useChatStore((s) => s.openPanel);
+  const [crewDialogOpen, setCrewDialogOpen] = useState(false);
 
   return (
     <footer className="flex h-8 shrink-0 items-center justify-between gap-3 border-t border-border/60 bg-card/60 px-3 text-[11px]">
@@ -69,6 +72,17 @@ export function StatusBar({
         ) : null}
       </div>
       <div className="flex shrink-0 items-center gap-1.5">
+        {workspace.kind === "ssh" && (
+          <button
+            type="button"
+            onClick={() => setCrewDialogOpen(true)}
+            className="flex h-6 items-center gap-1 rounded-sm px-1.5 text-[11px] text-emerald-600 outline-none hover:bg-accent hover:text-emerald-700 focus:outline-none"
+            title="Run AI Crew"
+          >
+            <HugeiconsIcon icon={BotIcon} size={13} strokeWidth={1.75} />
+            Run Crew
+          </button>
+        )}
         <AgentStatusPill onClick={onOpenMini} />
         {panelOpen && hasComposer ? (
           <AiStatusBarControls />
@@ -76,6 +90,11 @@ export function StatusBar({
           <AiOpenButton onOpen={openPanel} />
         )}
       </div>
+      <CrewRunDialog
+        open={crewDialogOpen}
+        onClose={() => setCrewDialogOpen(false)}
+        workspace={workspace}
+      />
     </footer>
   );
 }

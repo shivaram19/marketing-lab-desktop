@@ -715,6 +715,26 @@ pub(crate) fn git_output(
     })
 }
 
+#[tauri::command]
+pub async fn ssh_run_crew(
+    workspace: WorkspaceEnv,
+    crew_type: String,
+    topic: String,
+) -> Result<serde_json::Value, String> {
+    if !is_ssh(&workspace) {
+        return Err("workspace is not ssh".to_string());
+    }
+    run_remote_json(
+        &workspace,
+        "run_crew",
+        serde_json::json!({
+            "type": crew_type,
+            "topic": topic,
+        }),
+        300,
+    )
+}
+
 const REMOTE_PYTHON: &str = r#"
 import fnmatch
 import json
@@ -1105,6 +1125,42 @@ def git_run(cwd, args):
         "truncated": False,
     }
 
+def run_crew(args):
+    import subprocess
+    crew_type = args.get("type", "research")
+    topic = args.get("topic", "")
+    env = os.environ.copy()
+    env["CREW_TOPIC"] = topic
+    env["CREW_DATE"] = subprocess.check_output(["date", "+%Y-%m-%d"]).decode().strip()
+    result = subprocess.run(
+        ["bash", "-lc", f"~/tools/run-crew.sh {crew_type} '{topic}'"],
+        capture_output=True,
+        text=True,
+        cwd="/home/marketer",
+        env=env,
+        timeout=300
+    )
+    return {
+        "success": result.returncode == 0,
+        "stdout": result.stdout,
+        "stderr": result.stderr,
+    }
+
+def vault_graph(args):
+    import subprocess
+    result = subprocess.run(
+        ["python3", "/home/marketer/tools/vault-graph.py"],
+        capture_output=True,
+        text=True,
+        cwd="/home/marketer",
+        timeout=60
+    )
+    return {
+        "success": result.returncode == 0,
+        "output_path": "/home/marketer/vault-graph.html",
+        "stdout": result.stdout,
+    }
+
 def main():
     op, root, payload = load_request()
     try:
@@ -1149,6 +1205,10 @@ def main():
         elif op == "git":
             cwd = abs_path(root, payload.get("cwd"))
             emit(True, git_run(cwd, payload.get("args")))
+        elif op == "run_crew":
+            emit(True, run_crew(payload))
+        elif op == "vault_graph":
+            emit(True, vault_graph(payload))
         else:
             fail(f"unsupported op: {op}")
     except Exception as exc:
