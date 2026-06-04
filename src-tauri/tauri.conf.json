@@ -80,5 +80,12 @@
     "shortDescription": "AI Marketing Research Desktop",
     "longDescription": "Marketing Lab \u2014 a customized AI desktop client for marketing research. Connects to your remote research VM via SSH."
   },
-  "plugins": {}
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDNCQUJGRDhBQjYwRTM0NjkKUldScE5BNjJpdjJyT3dIN0dqbUpHaDA4QW1GaDVmTTllRXdZVk96dFNTRUZ3Y2hiVGszYjFqRloK",
+      "endpoints": [
+        "https://github.com/crynta/terax-ai/releases/latest/download/latest.json"
+      ]
+    }
+  }
 }
