@@ -1,3 +1,4 @@
+Removed updater from plugins
 {
   "$schema": "https://schema.tauri.app/config/2",
   "productName": "Marketing Lab",
@@ -47,10 +48,16 @@
     "linux": {
       "deb": {
         "section": "utils",
-        "depends": ["libwebkit2gtk-4.1-0", "libgtk-3-0"]
+        "depends": [
+          "libwebkit2gtk-4.1-0",
+          "libgtk-3-0"
+        ]
       },
       "rpm": {
-        "depends": ["webkit2gtk4.1", "gtk3"]
+        "depends": [
+          "webkit2gtk4.1",
+          "gtk3"
+        ]
       },
       "appimage": {
         "bundleMediaFramework": true
@@ -62,7 +69,9 @@
       },
       "nsis": {
         "installMode": "currentUser",
-        "languages": ["English"],
+        "languages": [
+          "English"
+        ],
         "displayLanguageSelector": false,
         "installerIcon": "icons/icon.ico",
         "installerHooks": "./installer-hooks.nsh"
@@ -70,14 +79,7 @@
     },
     "category": "DeveloperTool",
     "shortDescription": "AI Marketing Research Desktop",
-    "longDescription": "Marketing Lab — a customized AI desktop client for marketing research. Connects to your remote research VM via SSH."
+    "longDescription": "Marketing Lab \u2014 a customized AI desktop client for marketing research. Connects to your remote research VM via SSH."
   },
-  "plugins": {
-    "updater": {
-      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDNCQUJGRDhBQjYwRTM0NjkKUldScE5BNjJpdjJyT3dIN0dqbUpHaDA4QW1GaDVmTTllRXdZVk96dFNTRUZ3Y2hiVGszYjFqRloK",
-      "endpoints": [
-        "https://github.com/crynta/terax-ai/releases/latest/download/latest.json"
-      ]
-    }
-  }
+  "plugins": {}
 }
